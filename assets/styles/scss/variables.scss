@@ -1,0 +1,45 @@
+//COLORS
+$mainRed: rgba(255, 0, 53, 1);
+$darkRed: rgba(217, 17, 59, 1);
+$black: rgba(13, 15, 20, 1);
+$lighRed: rgba(249, 242, 244, 1);
+$darkGray: rgba(150, 159, 168, 1);
+$lightGray: rgba(228, 228, 228, 1);
+$green: rgba(65, 181, 98, 1);
+$lightBG: rgba(248, 248, 250, 1);
+$darkBlue: rgba(78, 147, 231, 1);
+$lightBlue: rgba(230, 238, 248, 1);
+
+// //BUTTONS
+// @mixin activeButton {
+//   padding: 18px 40px;
+//   border: none;
+//   outline: none;
+//   background-color: $sovietRed;
+//   @include rodchenko();
+
+//   font-weight: 600;
+//   font-size: 18px;
+//   text-transform: uppercase;
+//   color: #fff;
+//   transition: 0.2s;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: $sovietDarkRed;
+//   }
+// }
+
+// @mixin disabledButton {
+//   padding: 18px 40px;
+//   border: none;
+//   outline: none;
+//   background-color: rgba(183, 183, 183, 1);
+//   @include rodchenko();
+
+//   font-weight: 600;
+//   font-size: 18px;
+//   text-transform: uppercase;
+//   color: #fff;
+//   transition: 0.2s;
+//   cursor: pointer;
+// }
