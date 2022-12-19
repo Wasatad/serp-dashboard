@@ -50,7 +50,7 @@
             {{ visibility.now }}%
           </div>
           <div v-if="!downloadingInProcess" class="trend">
-            <span style="font-size: 14px" :class="visibilityStyle"
+            <span style="font-size: 14px" :class="visibilityTextStyle"
               >{{ visibility.diff > 0 ? "+" : "" }}{{ visibility.diff }}%</span
             >
             <div :class="visibilityArrow"></div>
@@ -77,8 +77,15 @@
             <span class="circle circle-7"></span>
             <span class="circle circle-8"></span>
           </div>
+
           <div v-if="!downloadingInProcess" class="main-number">
-            {{ position }}
+            {{ position.now }}
+          </div>
+          <div v-if="!downloadingInProcess" class="trend">
+            <span style="font-size: 14px" :class="positionTextStyle"
+              >{{ position.diff > 0 ? "+" : "" }}{{ position.diff }}</span
+            >
+            <div :class="positionArrow"></div>
           </div>
         </div>
       </div>
@@ -127,7 +134,7 @@ export default {
       "trend",
       "downloadingInProcess",
     ]),
-    visibilityStyle() {
+    visibilityTextStyle() {
       if (this.visibility.diff > 0) {
         return "green-text";
       } else if (this.visibility.diff < 0) {
@@ -137,9 +144,27 @@ export default {
       }
     },
     visibilityArrow() {
-      if (this.visibility > 0) {
+      if (this.visibility.diff > 0) {
         return "small-green-arrow";
-      } else if (this.visibility < 0) {
+      } else if (this.visibility.diff < 0) {
+        return "small-red-arrow";
+      } else {
+        return "";
+      }
+    },
+    positionTextStyle() {
+      if (this.position.diff > 0) {
+        return "green-text";
+      } else if (this.position.diff < 0) {
+        return "red-text";
+      } else {
+        return "grey-text";
+      }
+    },
+    positionArrow() {
+      if (this.position.diff > 0) {
+        return "small-green-arrow";
+      } else if (this.position.diff < 0) {
         return "small-red-arrow";
       } else {
         return "";

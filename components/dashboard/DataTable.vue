@@ -139,20 +139,20 @@
           sortable
           label="Коммерциализ."
           prop="commerce"
-          min-width="150"
+          min-width="170"
         >
           <template slot-scope="scope">
             <div>{{ scope.row.commerce }}%</div>
           </template>
         </el-table-column>
-        <el-table-column label="Примеси" prop="impurities" min-width="120">
+        <el-table-column label="Примеси" prop="impurities" min-width="90">
           <template slot-scope="scope">
             <div v-for="(item, id) in scope.row.impurities" :key="id">
               <img :src="transformLinkIntoImages(item)" alt="" />
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="URL" prop="url" width="180"> </el-table-column>
+        <el-table-column label="URL" prop="url" width="160"> </el-table-column>
       </el-table>
     </div>
     <div class="pagination">

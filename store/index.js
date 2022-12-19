@@ -9,7 +9,10 @@ const store = () => {
         now: 0,
         diff: 0,
       },
-      position: 0,
+      position: {
+        now: 0,
+        diff: 0,
+      },
       trend: 0,
 
       // Список ключей в таблице, группы и теги проекта
@@ -171,7 +174,8 @@ const store = () => {
         state.keysQty = randomInteger(1500, 250000);
         state.visibility.now = randomInteger(0, 100);
         state.visibility.diff = randomInteger(-50, 50);
-        state.position = randomInteger(0, 100);
+        state.position.now = randomInteger(0, 100);
+        state.position.diff = randomInteger(-50, 50);
         state.trend = randomInteger(-50, 50);
       },
     },

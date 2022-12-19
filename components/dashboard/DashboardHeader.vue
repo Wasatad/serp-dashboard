@@ -28,7 +28,7 @@
         <el-tooltip
           class="download-btn"
           effect="light"
-          content="Скачать .exe"
+          content="Скачать отчет"
           placement="left"
         >
           <el-button

@@ -239,11 +239,7 @@ export default {
         },
         {
           value: "phone",
-          label: "Смартфон",
-        },
-        {
-          value: "tablet",
-          label: "Планшет",
+          label: "Моб. устройства",
         },
       ],
       device: "pc",
