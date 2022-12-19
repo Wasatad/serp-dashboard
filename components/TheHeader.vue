@@ -1,50 +1,59 @@
 <template>
   <div>
-    <div @click="switchMobileMenu" class="burger-menu">
-      <span v-if="!mobileMenuVisible" style="color: #fff; font-size: 32px"
+    <div class="burger-menu">
+      <img src="@/assets/img/serp-logo-min.svg" alt="" />
+      <span
+        @click="switchMobileMenu"
+        v-if="!mobileMenuVisible"
+        style="color: #fff; font-size: 32px"
         ><i class="fa-sharp fa-solid fa-bars"></i
       ></span>
-      <span v-if="mobileMenuVisible" style="color: #fff; font-size: 32px"
+      <span
+        @click="switchMobileMenu"
+        v-if="mobileMenuVisible"
+        style="color: #fff; font-size: 32px"
         ><i class="fa-sharp fa-solid fa-xmark"></i
       ></span>
     </div>
     <div v-if="mobileMenuVisible" class="mobile-header">
-      <el-menu
-        router
-        :default-active="'/' + $route.path.split('/')[1]"
-        class="el-menu-vertical"
-        @open="handleOpen"
-        @close="handleClose"
-        background-color="#0D0F14"
-        text-color="#696B76"
-        active-text-color="#fff"
-      >
-        <el-menu-item index="/dashboard">
-          <i class="fa-regular fa-desktop"></i>
-          <span>Общая информация</span>
-        </el-menu-item>
-        <el-menu-item index="/positions">
-          <i class="fa-regular fa-list-ol"></i>
-          <span>Мониторинг позиций</span>
-        </el-menu-item>
-        <el-menu-item index="/competitors">
-          <i class="fa-regular fa-window-restore"></i>
-          <span>Анализ конкурентов</span>
-        </el-menu-item>
-        <el-menu-item index="/seo">
-          <i class="fa-regular fa-laptop-code"></i>
-          <span>SEO-аудит сайтов</span>
-        </el-menu-item>
-        <el-menu-item index="/social">
-          <i class="fa-regular fa-hashtag"></i>
-          <span>Упоминания в соцсетях</span>
-        </el-menu-item>
-      </el-menu>
-      <div ref="supportBtn" class="support-container">
-        <div class="el-menu-vertical-bottom">
-          <div class="support-tab">
-            <i class="fa-regular fa-life-ring"></i>
-            <span>Поддержка</span>
+      <div class="mobile-inner">
+        <el-menu
+          router
+          :default-active="'/' + $route.path.split('/')[1]"
+          class="el-menu-vertical"
+          @open="handleOpen"
+          @close="handleClose"
+          background-color="#0D0F14"
+          text-color="#696B76"
+          active-text-color="#fff"
+        >
+          <el-menu-item @click="switchMobileMenu" index="/dashboard">
+            <i class="fa-regular fa-desktop"></i>
+            <span>Общая информация</span>
+          </el-menu-item>
+          <el-menu-item @click="switchMobileMenu" index="/positions">
+            <i class="fa-regular fa-list-ol"></i>
+            <span>Мониторинг позиций</span>
+          </el-menu-item>
+          <el-menu-item @click="switchMobileMenu" index="/competitors">
+            <i class="fa-regular fa-window-restore"></i>
+            <span>Анализ конкурентов</span>
+          </el-menu-item>
+          <el-menu-item @click="switchMobileMenu" index="/seo">
+            <i class="fa-regular fa-laptop-code"></i>
+            <span>SEO-аудит сайтов</span>
+          </el-menu-item>
+          <el-menu-item @click="switchMobileMenu" index="/social">
+            <i class="fa-regular fa-hashtag"></i>
+            <span>Упоминания в соцсетях</span>
+          </el-menu-item>
+        </el-menu>
+        <div ref="supportBtn" class="support-container">
+          <div class="el-menu-vertical-bottom">
+            <div class="support-tab">
+              <i class="fa-regular fa-life-ring"></i>
+              <span>Поддержка</span>
+            </div>
           </div>
         </div>
       </div>
@@ -56,12 +65,12 @@
         </span>
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/dashboard' }"
-            >Проекты</el-breadcrumb-item
+            >Общая информация</el-breadcrumb-item
           >
           <el-breadcrumb-item :to="{ path: '/dashboard' }"
-            >Carparts</el-breadcrumb-item
+            >Проекты</el-breadcrumb-item
           >
-          <el-breadcrumb-item>Основные данные</el-breadcrumb-item>
+          <el-breadcrumb-item>Carparts</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <div class="profile-info">
@@ -109,7 +118,7 @@ export default {
   left: 0;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 0 24px;
 
@@ -117,16 +126,19 @@ export default {
     display: none;
   }
 }
-.mobile-header {
-  position: absolute;
+
+.mobile-inner {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: 101;
-
+}
+.mobile-header {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   gap: 20px;
 
@@ -135,6 +147,7 @@ export default {
   .el-menu {
     margin-top: 56px;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -148,11 +161,11 @@ export default {
   }
 
   .support-container {
-    // position: fixed;
-    // bottom: 0;
-    // left: 0;
-    width: 330px;
+    width: 100%;
     height: 68px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0px;
     border-top: 1px solid rgba(30, 35, 49, 1);
     color: rgba(105, 107, 118, 1);
 
@@ -228,7 +241,7 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      color: $darkGray;
+      color: $darkGrey;
       gap: 8px;
       border-right: 1px solid #e0e0e0;
 

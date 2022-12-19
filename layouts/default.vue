@@ -88,7 +88,6 @@ export default {
       console.log("is closed");
     },
     hideSidebar() {
-      // console.log(this.$refs.sidebar.classList.contains("sidebar-minimized"));
       this.sidebarMinimized = !this.sidebarMinimized;
       if (!this.$refs.sidebar.classList.contains("sidebar-minimized")) {
         this.$refs.sidebar.classList.add("sidebar-minimized");
@@ -226,7 +225,7 @@ label {
   display: block;
   font-weight: 400;
   font-size: 14px;
-  color: $darkGray;
+  color: $darkGrey;
   // margin-bottom: 10px;
 }
 
@@ -269,7 +268,6 @@ input:focus {
 
 .sidebar-minimized {
   max-width: 94px !important;
-  // margin-left: -110px !important;
 
   .nav-container span {
     visibility: hidden;
@@ -289,7 +287,7 @@ input:focus {
   z-index: 100;
   overflow: hidden;
   background-color: $black;
-  color: $darkGray;
+  color: $darkGrey;
   text-align: left;
   border-color: $black !important;
   font-weight: 500;
@@ -423,12 +421,8 @@ input:focus {
 }
 
 .main-container {
-  // margin-left: 330px;
-  // padding: 0 20px 64px 100px;
   margin: 0 auto;
   padding: 20px 20px;
-  // margin-left: 330px;
-
   width: 100%;
   max-width: 1440px;
   transition: 0.2s ease-in-out;

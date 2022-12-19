@@ -36,7 +36,7 @@
           ></el-button>
         </el-tooltip>
 
-        <button class="refresh-btn">
+        <button @click="getDataFromServer" class="refresh-btn">
           <span class="arrows">
             <i class="fa-regular fa-arrows-rotate"></i>
           </span>
@@ -86,15 +86,30 @@
         class="project-tab-menu-vertical"
         @select="handleSelect"
       >
-        <el-menu-item index="/dashboard/main-data"
+        <el-menu-item
+          :index="'/dashboard/' + this.$route.params.id + '/' + 'main-data'"
           >Основные данные</el-menu-item
         >
-        <el-menu-item index="/dashboard/project-history">История</el-menu-item>
-        <el-menu-item index="/dashboard/project-competitors"
+        <el-menu-item
+          :index="
+            '/dashboard/' + this.$route.params.id + '/' + 'project-history'
+          "
+          >История</el-menu-item
+        >
+        <el-menu-item
+          :index="
+            '/dashboard/' + this.$route.params.id + '/' + 'project-competitors'
+          "
           >Конкуренты</el-menu-item
         >
-        <el-menu-item index="/dashboard/project-pages">Страницы</el-menu-item>
-        <el-menu-item index="/dashboard/project-settings"
+        <el-menu-item
+          :index="'/dashboard/' + this.$route.params.id + '/' + 'project-pages'"
+          >Страницы</el-menu-item
+        >
+        <el-menu-item
+          :index="
+            '/dashboard/' + this.$route.params.id + '/' + 'project-settings'
+          "
           >Параметры</el-menu-item
         >
       </el-menu>
@@ -103,11 +118,11 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   methods: {
-    handleSelect() {
-      console.log(1);
-    },
+    handleSelect() {},
+    ...mapActions(["getDataFromServer"]),
   },
 };
 </script>
@@ -147,15 +162,6 @@ export default {
           margin-top: -3px;
         }
       }
-
-      // .edit-icon {
-      //   padding-top: 12px;
-      //   margin-left: 12px;
-      //   @media (max-width: 500px) {
-      //     padding-top: 6px;
-      //     margin-left: 8px;
-      //   }
-      // }
     }
 
     .project-site {
@@ -169,7 +175,7 @@ export default {
 
       .project-site-link {
         text-decoration: none !important;
-        color: $darkGray;
+        color: $darkGrey;
       }
     }
     .project-controls {
@@ -177,7 +183,7 @@ export default {
         font-size: 16px;
         padding: 16px 18px;
         border-radius: 6px;
-        color: $darkGray;
+        color: $darkGrey;
         background: rgba(227, 245, 255, 0);
         &:hover {
           background: rgba(227, 245, 255, 0.6);
@@ -219,8 +225,6 @@ export default {
       justify-content: flex-start;
       align-items: center;
       margin-bottom: 35px;
-      // max-width: 800px;
-      // gap: 56px;
 
       @media (max-width: 800px) {
         display: none;
@@ -231,8 +235,7 @@ export default {
         font-size: 13px;
         letter-spacing: 0.09em;
         text-transform: uppercase;
-        color: $darkGray;
-        // padding: 0 0 62px 0;
+        color: $darkGrey;
         padding: 0 24px;
         margin-right: 56px;
 
@@ -249,7 +252,6 @@ export default {
 
         &:hover {
           background-color: rgba(243, 243, 248, 1) !important;
-          // padding: 0 24px;
         }
       }
       .is-active {

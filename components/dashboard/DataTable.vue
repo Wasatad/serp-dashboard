@@ -3,21 +3,25 @@
     <div class="table-filters">
       <div class="search-container">
         <el-input
-          @keyup.enter.native="updateData"
+          @keyup.enter.native="fetchData"
           placeholder="Поиск ключевой фразы"
           v-model="searchInput"
           clearable
           class="table-search"
         >
           <el-button
-            @click="updateData"
+            @click="fetchData"
             slot="append"
             icon="el-icon-search"
           ></el-button>
         </el-input>
       </div>
       <div class="other-filters">
-        <el-select v-model="activeGroup" placeholder="Выбор группы">
+        <el-select
+          v-model="activeGroup"
+          placeholder="Выбор группы"
+          @change="fetchData"
+        >
           <el-option
             v-for="item in groups"
             :key="item.value"
@@ -63,8 +67,9 @@
     <div class="data-table">
       <el-table
         ref="multipleTable"
-        :data="tableData"
+        :data="table"
         :fit="true"
+        v-loading="downloadingInProcess"
         :cell-class-name="brandIconsStyle"
         :header-cell-class-name="freqHeaderStyle"
         @selection-change="handleSelectionChange"
@@ -102,7 +107,11 @@
         <el-table-column sortable label="Частота" prop="freq" min-width="160">
           <template slot="header" slot-scope="scope">
             <div style="max-width: 150px">
-              <el-select v-model="activeFrequency" placeholder="Select">
+              <el-select
+                v-model="activeFrequency"
+                placeholder="Select"
+                @change="fetchData()"
+              >
                 <el-option
                   v-for="(item, index) in frequencyTypes"
                   :key="index"
@@ -154,7 +163,7 @@
         :page-sizes="[100, 200, 500, 1000]"
         :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="tableData.length"
+        :total="table.length"
       >
       </el-pagination>
     </div>
@@ -162,59 +171,17 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
       searchInput: "",
       activeGroup: "",
       activeTag: "",
-      chosenTags: [
-        { value: "техобслуживание", label: "техобслуживание" },
-        { value: "дтп", label: "дтп" },
-      ],
-      groups: [
-        { value: "скидки", label: "Скидки" },
-        { value: "ремонт", label: "Ремонт" },
-        { value: "разное", label: "Разное" },
-      ],
-      tags: [
-        { value: "техобслуживание", label: "техобслуживание" },
-        { value: "дтп", label: "дтп" },
-        { value: "аналоги", label: "аналоги" },
-        { value: "импорт", label: "импорт" },
-      ],
+      chosenTags: [],
 
       // Table
-      tableData: [
-        {
-          phrase: "купить",
-          // position: "1",
-          position: { now: 1, diff: 2 },
-          freq: 120000,
-          trend: 5,
-          commerce: 5,
-          impurities: ["yam"],
-          url: "exist.ru",
-        },
-        {
-          phrase: "недорого",
-          position: { now: 2, diff: -2 },
-          freq: 80000,
-          trend: -2,
-          commerce: 2,
-          impurities: ["ozon", "fb"],
-          url: "",
-        },
-        {
-          phrase: "москва",
-          position: { now: 3, diff: 0 },
-          freq: 2400,
-          trend: 3,
-          commerce: 40,
-          impurities: [],
-          url: "auto-parts-best-market-super-low-prices-very-very-long-url.ru",
-        },
-      ],
+      table: [],
 
       frequencyTypes: [
         "Частота",
@@ -236,11 +203,13 @@ export default {
       currentPage: 1,
     };
   },
+  computed: {
+    ...mapState(["downloadingInProcess", "tableData", "groups", "tags"]),
+  },
   methods: {
-    updateData() {
-      if (this.searchInput) {
-        console.log("ищем " + this.searchInput);
-      }
+    ...mapActions(["getDataFromServer"]),
+    fetchData() {
+      this.getDataFromServer();
     },
 
     tagSearch(queryString, cb) {
@@ -257,15 +226,16 @@ export default {
       };
     },
     handleTagSelect(tag) {
-      // console.log(tag);
       if (!this.chosenTags.includes(tag)) {
         this.chosenTags.push(tag);
+        this.fetchData();
       }
     },
     handleDeleteTag(tag) {
       this.chosenTags = this.chosenTags.filter(
         (storedTag) => storedTag.value != tag.value
       );
+      this.fetchData();
     },
 
     // Таблица
@@ -294,9 +264,10 @@ export default {
 
     // Удаление ключей
     deleteSelectedKeys() {
-      this.tableData = this.tableData.filter(
+      this.table = this.table.filter(
         (item) => !this.multipleSelection.includes(item)
       );
+      this.fetchData();
     },
 
     // Пагинация
@@ -306,6 +277,9 @@ export default {
     handleCurrentChange(val) {
       console.log(`current page: ${val}`);
     },
+  },
+  created() {
+    this.table = this.tableData;
   },
 };
 </script>

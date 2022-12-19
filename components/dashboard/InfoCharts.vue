@@ -4,253 +4,223 @@
     <div class="charts-row">
       <div class="chart-inner">
         <div class="chart-doghnut top-3">
-          <DonutChart :chartData="topThreeData.chartJS" />
+          <DonutChart :chartData="topThree.chartJS" />
         </div>
         <div class="top-label">
           <span style="color: #969fa8; font-weight: 400">ТОП </span
           ><span style="color: #0d0f14; font-weight: 700">#3</span>
         </div>
         <div class="chart-center-info">
-          {{ topThreeData.chartJS.datasets[0].data[0] }}%
+          {{ topThree.chartJS.datasets[0].data[0] }}%
           <hr />
           {{
-            topThreeData.keysTotal
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            topThree.keysTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }}
         </div>
       </div>
       <div class="chart-inner">
         <div class="chart-doghnut top-5">
-          <DonutChart :chartData="topFiveData.chartJS" />
+          <DonutChart :chartData="topFive.chartJS" />
         </div>
         <div class="top-label">
           <span style="color: #969fa8; font-weight: 400">ТОП </span
           ><span style="color: #0d0f14; font-weight: 700">#5</span>
         </div>
         <div class="chart-center-info">
-          {{ topFiveData.chartJS.datasets[0].data[0] }}%
+          {{ topFive.chartJS.datasets[0].data[0] }}%
           <span
             :class="[
-              topFiveData.percentDiff < 0 ? fallIndicator : growIndicator,
+              topFive.percentDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ topFiveData.percentDiff > 0 ? "(+" : ""
-            }}{{ topFiveData.percentDiff < 0 ? "(" : ""
-            }}{{
-              topFiveData.percentDiff != 0
-                ? topFiveData.percentDiff + "%)"
-                : "%"
-            }}
+            >{{ topFive.percentDiff > 0 ? "(+" : ""
+            }}{{ topFive.percentDiff < 0 ? "(" : ""
+            }}{{ topFive.percentDiff != 0 ? topFive.percentDiff + "%)" : "%" }}
           </span>
 
           <hr />
           {{
-            topFiveData.keysTotal
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            topFive.keysTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }}
           <span
-            :class="[topFiveData.keysDiff < 0 ? fallIndicator : growIndicator]"
-            >{{ topFiveData.keysDiff > 0 ? "(+" : ""
-            }}{{ topFiveData.keysDiff < 0 ? "(" : ""
-            }}{{ topFiveData.keysDiff != 0 ? topFiveData.keysDiff + ")" : "" }}
+            :class="[
+              topFive.keysDiff < 0 ? 'fall-indicator' : 'grow-indicator',
+            ]"
+            >{{ topFive.keysDiff > 0 ? "(+" : ""
+            }}{{ topFive.keysDiff < 0 ? "(" : ""
+            }}{{ topFive.keysDiff != 0 ? topFive.keysDiff + ")" : "" }}
           </span>
         </div>
       </div>
       <div class="chart-inner">
         <div class="chart-doghnut top-10">
-          <DonutChart :chartData="topTenData.chartJS" />
+          <DonutChart :chartData="topTen.chartJS" />
         </div>
         <div class="top-label">
           <span style="color: #969fa8; font-weight: 400">ТОП </span
           ><span style="color: #0d0f14; font-weight: 700">#10</span>
         </div>
         <div class="chart-center-info">
-          {{ topTenData.chartJS.datasets[0].data[0] }}%
+          {{ topTen.chartJS.datasets[0].data[0] }}%
           <span
             :class="[
-              topTenData.percentDiff < 0 ? fallIndicator : growIndicator,
+              topTen.percentDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ topTenData.percentDiff > 0 ? "(+" : ""
-            }}{{ topTenData.percentDiff < 0 ? "(" : ""
-            }}{{
-              topTenData.percentDiff != 0 ? topTenData.percentDiff + "%)" : "%"
-            }}
+            >{{ topTen.percentDiff > 0 ? "(+" : ""
+            }}{{ topTen.percentDiff < 0 ? "(" : ""
+            }}{{ topTen.percentDiff != 0 ? topTen.percentDiff + "%)" : "%" }}
           </span>
 
           <hr />
           {{
-            topTenData.keysTotal
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            topTen.keysTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }}
           <span
-            :class="[topTenData.keysDiff < 0 ? fallIndicator : growIndicator]"
-            >{{ topTenData.keysDiff > 0 ? "(+" : ""
-            }}{{ topTenData.keysDiff < 0 ? "(" : ""
-            }}{{ topTenData.keysDiff != 0 ? topTenData.keysDiff + ")" : "" }}
+            :class="[topTen.keysDiff < 0 ? 'fall-indicator' : 'grow-indicator']"
+            >{{ topTen.keysDiff > 0 ? "(+" : ""
+            }}{{ topTen.keysDiff < 0 ? "(" : ""
+            }}{{ topTen.keysDiff != 0 ? topTen.keysDiff + ")" : "" }}
           </span>
         </div>
       </div>
       <div class="chart-inner">
         <div class="chart-doghnut top-30">
-          <DonutChart :chartData="topThirtyData.chartJS" />
+          <DonutChart :chartData="topThirty.chartJS" />
         </div>
         <div class="top-label">
           <span style="color: #969fa8; font-weight: 400">ТОП </span
           ><span style="color: #0d0f14; font-weight: 700">#30</span>
         </div>
         <div class="chart-center-info">
-          {{ topThirtyData.chartJS.datasets[0].data[0] }}%
+          {{ topThirty.chartJS.datasets[0].data[0] }}%
           <span
             :class="[
-              topThirtyData.percentDiff < 0 ? fallIndicator : growIndicator,
+              topThirty.percentDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ topThirtyData.percentDiff > 0 ? "(+" : ""
-            }}{{ topThirtyData.percentDiff < 0 ? "(" : ""
+            >{{ topThirty.percentDiff > 0 ? "(+" : ""
+            }}{{ topThirty.percentDiff < 0 ? "(" : ""
             }}{{
-              topThirtyData.percentDiff != 0
-                ? topThirtyData.percentDiff + "%)"
-                : "%"
+              topThirty.percentDiff != 0 ? topThirty.percentDiff + "%)" : "%"
             }}
           </span>
 
           <hr />
           {{
-            topThirtyData.keysTotal
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            topThirty.keysTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }}
           <span
             :class="[
-              topThirtyData.keysDiff < 0 ? fallIndicator : growIndicator,
+              topThirty.keysDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ topThirtyData.keysDiff > 0 ? "(+" : ""
-            }}{{ topThirtyData.keysDiff < 0 ? "(" : ""
-            }}{{
-              topThirtyData.keysDiff != 0 ? topThirtyData.keysDiff + ")" : ""
-            }}
+            >{{ topThirty.keysDiff > 0 ? "(+" : ""
+            }}{{ topThirty.keysDiff < 0 ? "(" : ""
+            }}{{ topThirty.keysDiff != 0 ? topThirty.keysDiff + ")" : "" }}
           </span>
         </div>
       </div>
       <div class="chart-inner">
         <div class="chart-doghnut top-50">
-          <DonutChart :chartData="topFiftyData.chartJS" />
+          <DonutChart :chartData="topFifty.chartJS" />
         </div>
         <div class="top-label">
           <span style="color: #969fa8; font-weight: 400">ТОП </span
           ><span style="color: #0d0f14; font-weight: 700">#50</span>
         </div>
         <div class="chart-center-info">
-          {{ topFiftyData.chartJS.datasets[0].data[0] }}%
+          {{ topFifty.chartJS.datasets[0].data[0] }}%
           <span
             :class="[
-              topFiftyData.percentDiff < 0 ? fallIndicator : growIndicator,
+              topFifty.percentDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ topFiftyData.percentDiff > 0 ? "(+" : ""
-            }}{{ topFiftyData.percentDiff < 0 ? "(" : ""
+            >{{ topFifty.percentDiff > 0 ? "(+" : ""
+            }}{{ topFifty.percentDiff < 0 ? "(" : ""
             }}{{
-              topFiftyData.percentDiff != 0
-                ? topFiftyData.percentDiff + "%)"
-                : "%"
+              topFifty.percentDiff != 0 ? topFifty.percentDiff + "%)" : "%"
             }}
           </span>
 
           <hr />
           {{
-            topFiftyData.keysTotal
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            topFifty.keysTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }}
           <span
-            :class="[topFiftyData.keysDiff < 0 ? fallIndicator : growIndicator]"
-            >{{ topFiftyData.keysDiff > 0 ? "(+" : ""
-            }}{{ topFiftyData.keysDiff < 0 ? "(" : ""
-            }}{{
-              topFiftyData.keysDiff != 0 ? topFiftyData.keysDiff + ")" : ""
-            }}
+            :class="[
+              topFifty.keysDiff < 0 ? 'fall-indicator' : 'grow-indicator',
+            ]"
+            >{{ topFifty.keysDiff > 0 ? "(+" : ""
+            }}{{ topFifty.keysDiff < 0 ? "(" : ""
+            }}{{ topFifty.keysDiff != 0 ? topFifty.keysDiff + ")" : "" }}
           </span>
         </div>
       </div>
       <div class="chart-inner">
         <div class="chart-doghnut top-100">
-          <DonutChart :chartData="topHundredData.chartJS" />
+          <DonutChart :chartData="topHundred.chartJS" />
         </div>
         <div class="top-label">
           <span style="color: #969fa8; font-weight: 400">ТОП </span
           ><span style="color: #0d0f14; font-weight: 700">#100</span>
         </div>
         <div class="chart-center-info">
-          {{ topHundredData.chartJS.datasets[0].data[0] }}%
+          {{ topHundred.chartJS.datasets[0].data[0] }}%
           <span
             :class="[
-              topHundredData.percentDiff < 0 ? fallIndicator : growIndicator,
+              topHundred.percentDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ topHundredData.percentDiff > 0 ? "(+" : ""
-            }}{{ topHundredData.percentDiff < 0 ? "(" : ""
+            >{{ topHundred.percentDiff > 0 ? "(+" : ""
+            }}{{ topHundred.percentDiff < 0 ? "(" : ""
             }}{{
-              topHundredData.percentDiff != 0
-                ? topHundredData.percentDiff + "%)"
-                : "%"
+              topHundred.percentDiff != 0 ? topHundred.percentDiff + "%)" : "%"
             }}
           </span>
 
           <hr />
           {{
-            topHundredData.keysTotal
+            topHundred.keysTotal
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }}
           <span
             :class="[
-              topHundredData.keysDiff < 0 ? fallIndicator : growIndicator,
+              topHundred.keysDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ topHundredData.keysDiff > 0 ? "(+" : ""
-            }}{{ topHundredData.keysDiff < 0 ? "(" : ""
-            }}{{
-              topHundredData.keysDiff != 0 ? topHundredData.keysDiff + ")" : ""
-            }}
+            >{{ topHundred.keysDiff > 0 ? "(+" : ""
+            }}{{ topHundred.keysDiff < 0 ? "(" : ""
+            }}{{ topHundred.keysDiff != 0 ? topHundred.keysDiff + ")" : "" }}
           </span>
         </div>
       </div>
       <div class="chart-inner">
         <div class="chart-doghnut up-100">
-          <DonutChart :chartData="upHundredData.chartJS" />
+          <DonutChart :chartData="upHundred.chartJS" />
         </div>
         <div class="top-label">
           <span style="color: #969fa8; font-weight: 400">ТОП </span
           ><span style="color: #0d0f14; font-weight: 700">>100</span>
         </div>
         <div class="chart-center-info">
-          {{ upHundredData.chartJS.datasets[0].data[0] }}%
+          {{ upHundred.chartJS.datasets[0].data[0] }}%
           <span
             :class="[
-              upHundredData.percentDiff < 0 ? fallIndicator : growIndicator,
+              upHundred.percentDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ upHundredData.percentDiff > 0 ? "(+" : ""
-            }}{{ upHundredData.percentDiff < 0 ? "(" : ""
+            >{{ upHundred.percentDiff > 0 ? "(+" : ""
+            }}{{ upHundred.percentDiff < 0 ? "(" : ""
             }}{{
-              upHundredData.percentDiff != 0
-                ? upHundredData.percentDiff + "%)"
-                : "%"
+              upHundred.percentDiff != 0 ? upHundred.percentDiff + "%)" : "%"
             }}
           </span>
 
           <hr />
           {{
-            upHundredData.keysTotal
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            upHundred.keysTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }}
           <span
             :class="[
-              upHundredData.keysDiff < 0 ? fallIndicator : growIndicator,
+              upHundred.keysDiff < 0 ? 'fall-indicator' : 'grow-indicator',
             ]"
-            >{{ upHundredData.keysDiff > 0 ? "(+" : ""
-            }}{{ upHundredData.keysDiff < 0 ? "(" : ""
-            }}{{
-              upHundredData.keysDiff != 0 ? upHundredData.keysDiff + ")" : ""
-            }}
+            >{{ upHundred.keysDiff > 0 ? "(+" : ""
+            }}{{ upHundred.keysDiff < 0 ? "(" : ""
+            }}{{ upHundred.keysDiff != 0 ? upHundred.keysDiff + ")" : "" }}
           </span>
         </div>
       </div>
@@ -260,125 +230,39 @@
 
 <script>
 import DonutChart from "@/components/charts/DonutChart.vue";
+import { mapState } from "vuex";
 export default {
   components: { DonutChart },
   data() {
     return {
-      // Данные для графиков
-
-      chartData: {
-        labels: ["30", "70"],
-        datasets: [
-          {
-            data: [30, 70],
-            backgroundColor: ["#FF0035", "#EEEEEE"],
-          },
-        ],
-      },
-      topThreeData: {
-        chartJS: {
-          labels: ["0", "0"],
-          datasets: [
-            {
-              data: [30, 70],
-              backgroundColor: ["#FF0035", "#EEEEEE"],
-            },
-          ],
-        },
-        keysTotal: 2399,
-        keysDiff: "",
-        percentDiff: "",
-      },
-      topFiveData: {
-        chartJS: {
-          labels: ["0", "0"],
-          datasets: [
-            {
-              data: [27, 73],
-              backgroundColor: ["#FF0035", "#EEEEEE"],
-            },
-          ],
-        },
-        keysTotal: 2399,
-        keysDiff: 25,
-        percentDiff: 1.5,
-      },
-      topTenData: {
-        chartJS: {
-          labels: ["0", "0"],
-          datasets: [
-            {
-              data: [28, 72],
-              backgroundColor: ["#FF0035", "#EEEEEE"],
-            },
-          ],
-        },
-        keysTotal: 10343,
-        keysDiff: -25,
-        percentDiff: -1.5,
-      },
-
-      topThirtyData: {
-        chartJS: {
-          labels: ["0", "0"],
-          datasets: [
-            {
-              data: [35, 65],
-              backgroundColor: ["#FF0035", "#EEEEEE"],
-            },
-          ],
-        },
-        keysTotal: 122993,
-        keysDiff: -2000,
-        percentDiff: -2,
-      },
-      topFiftyData: {
-        chartJS: {
-          labels: ["0", "0"],
-          datasets: [
-            {
-              data: [15, 85],
-              backgroundColor: ["#FF0035", "#EEEEEE"],
-            },
-          ],
-        },
-        keysTotal: 11393,
-        keysDiff: 230,
-        percentDiff: 4,
-      },
-      topHundredData: {
-        chartJS: {
-          labels: ["0", "0"],
-          datasets: [
-            {
-              data: [50, 50],
-              backgroundColor: ["#FF0035", "#EEEEEE"],
-            },
-          ],
-        },
-        keysTotal: 443,
-        keysDiff: -556,
-        percentDiff: -150,
-      },
-      upHundredData: {
-        chartJS: {
-          labels: ["0", "0"],
-          datasets: [
-            {
-              data: [25, 75],
-              backgroundColor: ["#FF0035", "#EEEEEE"],
-            },
-          ],
-        },
-        keysTotal: 123553,
-        keysDiff: 1004,
-        percentDiff: 16,
-      },
-
-      // Стили
-      fallIndicator: "fall-indicator",
-      growIndicator: "grow-indicator",
+      topThree: {},
+      topFive: {},
+      topTen: {},
+      topThirty: {},
+      topFifty: {},
+      topHundred: {},
+      upHundred: {},
     };
+  },
+  computed: {
+    ...mapState([
+      "topThreeData",
+      "topFiveData",
+      "topTenData",
+      "topThirtyData",
+      "topFiftyData",
+      "topHundredData",
+      "upHundredData",
+    ]),
+  },
+  created() {
+    this.topThree = this.topThreeData;
+    this.topFive = this.topFiveData;
+    this.topTen = this.topTenData;
+    this.topThirty = this.topThirtyData;
+    this.topFifty = this.topFiftyData;
+    this.topHundred = this.topHundredData;
+    this.upHundred = this.upHundredData;
   },
 };
 </script>

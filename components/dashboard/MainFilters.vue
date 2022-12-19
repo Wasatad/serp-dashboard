@@ -8,6 +8,7 @@
             v-model="searchService"
             placeholder="Выбор"
             id="searchService"
+            @change="fetchData"
           >
             <el-option
               v-for="item in searchServicesOptions"
@@ -20,7 +21,12 @@
         </div>
         <div class="input-container">
           <label for="device">Тип устройства</label>
-          <el-select v-model="device" placeholder="Выбор" id="device">
+          <el-select
+            v-model="device"
+            placeholder="Выбор"
+            id="device"
+            @change="fetchData"
+          >
             <el-option
               v-for="item in devicesOptions"
               :key="item.value"
@@ -32,7 +38,12 @@
         </div>
         <div class="input-container">
           <label for="device">Регион</label>
-          <el-select v-model="location" placeholder="Выбор" id="location">
+          <el-select
+            v-model="location"
+            placeholder="Выбор"
+            id="location"
+            @change="fetchData"
+          >
             <el-option
               v-for="item in locationOptions"
               :key="item.value"
@@ -52,7 +63,10 @@
               ></span>
               {{ collapsedFiltersName }}
             </div>
-            <div v-if="this.activeFiltersQty > 0" class="filters-bage">
+            <div
+              v-if="activeFiltersQty && !filtersPanelOpened > 0"
+              class="filters-bage"
+            >
               <span>{{ activeFiltersQty }}</span>
             </div>
           </template>
@@ -201,6 +215,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -297,28 +312,45 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["getDataFromServer"]),
+
+    fetchData() {
+      this.getDataFromServer();
+    },
+
     // Имитация запроса на сервер, обновление данных
     updateData() {
-      // console.log(this.oldMinPositon);
-
       let allAppliedFIlters = 0;
-      if (this.minPosition != undefined && this.minPosition != 1) {
+      if (
+        (this.minPosition != undefined && this.minPosition != 1) ||
+        this.maxPosition != undefined
+      ) {
         allAppliedFIlters += 1;
       }
-      if (this.maxPosition != undefined) {
-        allAppliedFIlters += 1;
-      }
-      if (this.maxFrequency != undefined) {
-        allAppliedFIlters += 1;
-      }
-      if (this.minFrequency != undefined && this.minFrequency != 0) {
+
+      if (
+        this.maxFrequency != undefined ||
+        (this.minFrequency != undefined && this.minFrequency != 0)
+      ) {
         allAppliedFIlters += 1;
       }
       if (this.chosenURLs.length > 0) {
         allAppliedFIlters += 1;
       }
+
+      let allIllustratedFilters = document.querySelectorAll(
+        ".illustrated-filter"
+      );
+
+      for (let i = 0; i < allIllustratedFilters.length; i++) {
+        if (allIllustratedFilters[i].classList.contains("active")) {
+          allAppliedFIlters += 1;
+        }
+      }
+
       this.activeFiltersQty = allAppliedFIlters;
       this.newFilters = false;
+      this.fetchData();
     },
 
     // Обновление названия кнопки раскрыавющейся панели с фильтрами
@@ -375,6 +407,7 @@ export default {
       ) {
         e.target.closest(".illustrated-filter").classList.remove("active");
         console.log(1);
+        this.activeFiltersQty -= 1;
       } else {
         let allIllustratedFilters = document.querySelectorAll(
           ".illustrated-filter"
@@ -385,6 +418,8 @@ export default {
           }
         }
         e.target.closest(".illustrated-filter").classList.add("active");
+        this.activeFiltersQty += 1;
+        this.fetchData();
       }
     },
   },
@@ -432,8 +467,8 @@ export default {
 
       .filters-bage {
         order: 1;
-        width: 22px;
-        height: 22px;
+        width: 18px;
+        height: 18px;
         background-color: $green;
         display: flex;
         justify-content: center;
@@ -442,6 +477,7 @@ export default {
         border-radius: 100%;
         span {
           margin-right: 1px;
+          font-size: 12px;
         }
       }
     }
@@ -461,7 +497,7 @@ export default {
     display: block;
     font-weight: 400;
     font-size: 14px;
-    color: $darkGray;
+    color: $darkGrey;
     margin-bottom: 10px;
   }
 
@@ -538,7 +574,7 @@ export default {
     background: none;
     padding: 0;
     border: none;
-    color: $darkGray;
+    color: $darkGrey;
     &:hover {
       color: #4e93e7;
     }
