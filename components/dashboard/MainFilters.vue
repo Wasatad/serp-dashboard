@@ -411,6 +411,7 @@ export default {
         for (let i = 0; i < allIllustratedFilters.length; i++) {
           if (allIllustratedFilters[i].classList.contains("active")) {
             allIllustratedFilters[i].classList.remove("active");
+            this.activeFiltersQty -= 1;
           }
         }
         e.target.closest(".illustrated-filter").classList.add("active");
